@@ -215,15 +215,35 @@ public:
 // Driver program
 int main() {
     DoublyLinkedList list;
-    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
+    //creates random numbers
+    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
     for (int i = 0; i < size; ++i)
         list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+
+
     cout << "List forward: ";
     list.print();
 
     cout << "List backward: ";
     list.print_reverse();
+
+    //to test 
+     int val_to_delete = rand() % (MAX_NR-MIN_NR+1) + MIN_NR;
+    cout << "Deleting value " << val_to_delete << endl;
+    list.delete_val(val_to_delete);
+    cout << "List after deleting " << val_to_delete << ": ";
+    list.print();
+    
+    cout << "Popping back node" << endl;
+    list.pop_back();
+    cout << "List after popping back: ";
+    list.print();
+    
+    cout << "Popping front node" << endl;
+    list.pop_front();
+    cout << "List after popping front: ";
+    list.print();
 
     cout << "Deleting list, then trying to print.\n";
     list.~DoublyLinkedList();
