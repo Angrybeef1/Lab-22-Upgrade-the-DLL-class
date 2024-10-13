@@ -133,6 +133,24 @@ public:
         
         delete temp;
     }
+
+    void pop_front() {
+        if (!head) {
+            cout << "List is empty. Cannot pop front." << endl;
+            return;
+        }
+        
+        Node* temp = head;
+        head = head->next;
+        
+        if (head) {
+            head->prev = nullptr;
+        } else {
+            tail = nullptr; // List is now empty
+        }
+        
+        delete temp;
+    }
     
     void print() {
         Node* current = head;
