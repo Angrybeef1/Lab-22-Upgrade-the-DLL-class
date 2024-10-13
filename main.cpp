@@ -4,10 +4,12 @@
 
 using namespace std;
 
+//const to generate numbers
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
 class DoublyLinkedList {
 private:
+    //node for Doubly linked list
     struct Node {
         int data;
         Node* prev;
@@ -19,13 +21,15 @@ private:
         }
     };
 
-    Node* head;
+    //pointer to the first node (head) and last node (tail)
+    Node* head; 
     Node* tail;
 
 public:
-    // constructor
+    // constructor to create an empty list
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+    // Add a new node to the end of the list
     void push_back(int value) {
         Node* newNode = new Node(value);
         if (!tail)  // if there's no tail, the list is empty
@@ -37,6 +41,7 @@ public:
         }
     }
 
+    // Add a new node to the beginning of the list
     void push_front(int value) {
         Node* newNode = new Node(value);
         if (!head)  // if there's no head, the list is empty
@@ -48,6 +53,7 @@ public:
         }
     }
 
+    // Insert a new node after the specified position
     void insert_after(int value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
@@ -79,7 +85,8 @@ public:
         temp->next = newNode;
     }
 
-    void delete_node(int value) {
+    // Delete the first occurrence of a node with the specified value
+    void delete_val(int value) {
         if (!head) return; // Empty list
 
         Node* temp = head;
@@ -103,6 +110,7 @@ public:
         delete temp;
     }
 
+    // Delete the node at the specified position
     void delete_pos(int position) {
         if (!head || position < 0){
             cout << "invalid position or empty list." << endl;
@@ -134,6 +142,7 @@ public:
         delete temp;
     }
 
+    // Remove the first node (head) of the list
     void pop_front() {
         if (!head) {
             cout << "List is empty. Cannot pop front." << endl;
@@ -151,7 +160,27 @@ public:
         
         delete temp;
     }
+
+    // Remove the last node (tail) of the list
+    void pop_back() {
+        if (!tail) {
+            cout << "List is empty. Cannot pop back." << endl;
+            return;
+        }
+        
+        Node* temp = tail;
+        tail = tail->prev;
+        
+        if (tail) {
+            tail->next = nullptr;
+        } else {
+            head = nullptr; // List is now empty
+        }
+        
+        delete temp;
+    }
     
+    // Print the list from head to tail
     void print() {
         Node* current = head;
         if (!current) return;
@@ -162,7 +191,8 @@ public:
         cout << endl;
     }
 
-void print_reverse() {
+    // Print the list from tail to head
+    void print_reverse() {
         Node* current = tail;
         if (!current) return;
         while (current) {
@@ -172,6 +202,7 @@ void print_reverse() {
         cout << endl;
     }
 
+    // Destructor: clean up all nodes
     ~DoublyLinkedList() {
         while (head) {
             Node* temp = head;
